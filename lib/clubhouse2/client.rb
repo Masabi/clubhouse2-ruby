@@ -15,7 +15,6 @@ module Clubhouse
 		end
 
 		def api_request(method, *params)
-			puts [method, *params].join(', ')
 			response = HTTP.headers(content_type: 'application/json').send(method, *params)
 			case response.code
 			when 429
