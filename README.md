@@ -36,6 +36,11 @@ Get all stories last updated more than 30 days ago
 client.stories.select { |story| story.updated_at < Date.today - 30 }
 ```
 
+Get a list of all story states in the default workflow
+```ruby
+client.workflow.states
+```
+
 ### Methods returning arrays of resources
 ```ruby
 	client.projects 					# list all projects
