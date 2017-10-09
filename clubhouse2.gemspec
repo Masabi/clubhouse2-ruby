@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Clubhouse library for API version 2}
   spec.description   = %q{Does exactly what it says on the label}
-  spec.homepage      = "https://environments.justride.systems"
-  spec.license       = "Nonstandard"
+  spec.homepage      = "https://www.masabi.com"
+  spec.license       = "BSD"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.

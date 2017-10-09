@@ -1,3 +1,5 @@
 *.gem
 bin/
 Gemfile.lock
+Gemfile
+
