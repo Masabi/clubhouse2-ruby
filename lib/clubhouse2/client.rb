@@ -33,8 +33,10 @@ module Clubhouse
 			@resources[resource_class] = nil
 		end
 
+		# Take all the provided properties, and filter out any resources that don't match.
+		# If the value of a property is an object with an ID, match on that ID instead (makes for tidier queries)
 		def filter(object_array, args)
-			object_array.reject { |s| args.collect { |k, v| not [ *s.send(k) ].include? v }.reduce(:|) }
+			object_array.reject { |s| args.collect { |k, v| not [ *s.send(k) ].include? v.respond_to?(:id) ? v.id : v }.reduce(:|) }
 		end
 
 		# or v.empty? if v.respond_to?(:empty?)

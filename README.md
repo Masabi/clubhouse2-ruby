@@ -13,12 +13,12 @@ client = Clubhouse::Client.new(api_key: 'your_api_key')
 ### Quick-start
 Get all stories being followed by a user called 'James'.
 ```ruby
-client.stories(follower_ids: client.member(name: 'James').id)
+client.stories(follower_ids: client.member(name: 'James'))
 ```
 
 Get all stories in the 'Testing' project in the 'Completed' state.
 ```ruby
-client.project(name: 'Testing').stories(workflow_state_id: client.workflow.state(name: 'Completed').id)
+client.project(name: 'Testing').stories(workflow_state_id: client.workflow.state(name: 'Completed'))
 ```
 
 Get the names of all stories in the 'Testing' project
@@ -27,7 +27,6 @@ client.project(name: 'Testing').stories.collect(&:name)
 ```
 
 Get all non-archived stories with the label 'Out Of Hours'
-*Note: Labels behave a bit differently, and don't have IDs. We can filter using the label object itself here.*
 ```ruby
 client.stories(archived: false, labels: client.label(name: 'Out Of Hours'))
 ```
