@@ -46,8 +46,12 @@ module Clubhouse
 
 		def set_properties(object)
 			object.each_pair do |k, v|
-				instance_variable_set('@' + k.to_s, v)
+				instance_variable_set('@' + k.to_s, value_format(k, v))
 			end
+		end
+
+		def value_format(key, value)
+			Date.iso8601(value) rescue value
 		end
 
 		# Empties resource cache

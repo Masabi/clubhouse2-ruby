@@ -1,7 +1,7 @@
 module Clubhouse
 	class Workflow < ClubhouseResource		
 		def self.properties
-			[ :created_at, :default_state_id, :description, :entity_type, :id, :name, :states, :team_id, :updated_at ]
+			[ :created_at, :default_state_id, :description, :entity_type, :id, :name, :team_id, :updated_at ]
 		end
 
 		def initialize(client:, object:)

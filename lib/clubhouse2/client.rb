@@ -120,6 +120,5 @@ module Clubhouse
 		def create_workflow(**args); create_object(:workflow, args); end
 		def workflows(**args); get_objects(:workflow, args); end
 		def workflow(**args); get_object(:workflow, args); end
-
 	end
 end
