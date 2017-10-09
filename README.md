@@ -61,7 +61,7 @@ client.stories.select { |story| story.updated_at < Date.today - 30 }
 	client.team 						# list the first matching team
 ```
 ### Filtering
-It's possible to filter by any resource property provided by the API. Multiple property filters can be specified.
+It's possible to filter by any resource property provided by the API. Multiple property filters can be specified. Filters match any member of an array, for example you can filter `stories` by `follower_ids`, which will match any stories for which the given member, or members, are followers.
 ```ruby
 	client.project(id: 123)				# get a specific project
 	client.project(name: 'blah')		# get a project by name
