@@ -11,7 +11,8 @@ module Clubhouse
 			[
 				:archived, :days_to_thermometer, :entity_type, :id, :show_thermometer, :stats, :created_at, :updated_at,
 				:started_at, :completed_at, :comments, :position, :started, :project_ids, :completed, :blocker, :moved_at,
-				:task_ids, :files, :comment_ids, :workflow_state_id, :story_links, :mention_ids, :file_ids, :linked_file_ids
+				:task_ids, :files, :comment_ids, :workflow_state_id, :story_links, :mention_ids, :file_ids, :linked_file_ids,
+				:tasks
 			]
 		end
 
@@ -36,12 +37,18 @@ module Clubhouse
 			self.class.properties.each do |this_property|
 				self.class.class_eval { attr_accessor(this_property.to_sym) }
 				self.class.send(:define_method, (this_property.to_s + '=').to_sym) do |value|
-					update({ this_property => value })
+					update({ this_property => resolve_to_ids(value) })
+					instance_variable_set('@' + this_property.to_s, resolve_to_ids(value))
 				end
 			end
 
 			set_properties(object)
 			self
+		end
+
+		def resolve_to_ids(object)
+			return object.collect { |o| resolve_to_ids(o) } if object.is_a? Array
+			(object.respond_to?(:id) ? object.id : object)
 		end
 
 		def set_properties(object)
@@ -60,7 +67,7 @@ module Clubhouse
 		end
 
 		def update(args = {})
-			new_params = to_h.merge(args).reject { |k, v| self.class.property_filter_update.include? k.to_sym }
+			new_params = args.reject { |k, v| self.class.property_filter_update.include? k.to_sym }
 			validate(new_params)
 			flush
 			@client.api_request(:put, @client.url(api_url), :json => new_params)

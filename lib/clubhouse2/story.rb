@@ -43,6 +43,12 @@ module Clubhouse
 			end
 		end
 
+		def update(**args)
+			# The API won't let us try to update the project ID without changing it
+			args.delete(:project_id) if args[:project_id] == @project_id
+			super
+		end
+
 		def create_task(**args)
 			Task.validate(**args)
 			@tasks = nil

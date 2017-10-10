@@ -11,6 +11,7 @@ client = Clubhouse::Client.new(api_key: 'your_api_key')
 ```
 
 ### Quick-start
+#### Queries
 Get all stories being followed by a user called 'James'.
 ```ruby
 client.stories(follower_ids: client.member(name: 'James'))
@@ -39,6 +40,51 @@ client.stories.select { |story| story.updated_at < Date.today - 30 }
 Get a list of all story states in the default workflow
 ```ruby
 client.workflow.states
+```
+
+#### Creating resources
+See the official Clubhouse API documentation for valid properties to use here:
+https://clubhouse.io/api/rest/v2/
+
+Create a new story in the 'Testing' project
+```ruby
+client.project(name: 'Testing').create_story( **...** )
+client.create_story(project_id: client.project(name: 'Testing'), **...** )
+```
+
+#### Updating resources
+Updating a property of a resource can be achieved simply by using assignment operators, as shown in the examples below.
+
+See the official Clubhouse API documentation for valid properties to use here:
+https://clubhouse.io/api/rest/v2/
+
+Change the name of a story
+```ruby
+client.story(name: 'Old name').name = 'New name'
+client.story(id: 123).name = 'New name'
+```
+
+Add a new follower to a story
+```ruby
+client.story(id: 123).follower_ids += [ client.member(name: 'Jeff') ]
+```
+
+Assign a story to an epic
+```ruby
+client.story(id: 123).epic_id = client.epic(name: 'Awesome')
+```
+
+#### Deleting resources
+Deletion is possible by using the `delete!` method, which is available on most resources. Some resources can only be deleted from the web interface.
+
+Delete an epic
+```ruby
+client.epic(id: 123).delete!
+```
+
+Delete all stories in the 'Testing' project
+```ruby
+client.project(name: 'Testing').stories.each(&:delete!)
 ```
 
 ### Methods returning arrays of resources
