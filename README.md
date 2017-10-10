@@ -125,10 +125,10 @@ client.project(name: 'Testing').stories.each(&:delete!)
 	client.create_workflow 					# create a workflow
 	client.create_label 					# create a label
 	client.create_team 					# create a team
-	client.create_story_link 			# create a story link
-	client.story.create_comment			# create a comment for a story
-	client.story.create_task			# create a task for a story
-	client.epic.create_comment			# create a comment for an epic
+	client.create_story_link 				# create a story link
+	client.story.create_comment				# create a comment for a story
+	client.story.create_task				# create a task for a story
+	client.epic.create_comment				# create a comment for an epic
 ```
 ### Update methods
 ```ruby
@@ -147,7 +147,7 @@ client.project(name: 'Testing').stories.each(&:delete!)
 ### Filtering
 It's possible to filter by any resource property provided by the API. Multiple property filters can be specified. Filters match any member of an array, for example you can filter `stories` by `follower_ids`, which will match any stories for which the given member, or members, are followers.
 ```ruby
-	client.project(id: 123)				# get a specific project
+	client.project(id: 123)			# get a specific project
 	client.project(name: 'blah')		# get a project by name
 	client.projects(archived: true) 	# get all archived projects
 	client.project(id: 123).stories		# get stories belonging to a project
