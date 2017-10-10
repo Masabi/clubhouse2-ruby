@@ -117,24 +117,24 @@ client.project(name: 'Testing').stories.each(&:delete!)
 	client.create_project 					# create a project
 	client.create_milestone 				# create a milestone
 	client.create_member 					# create a member
-	client.create_epic 						# create an epic
+	client.create_epic 					# create an epic
 	client.create_story 					# create a story
 	client.create_category 					# create a category
 	client.create_workflow 					# create a workflow
 	client.create_label 					# create a label
-	client.create_team 						# create a team
+	client.create_team 					# create a team
 ```
 ### Update methods
 ```ruby
 	client.update_project 					# update a project
 	client.update_milestone 				# update a milestone
 	client.update_member 					# update a member
-	client.update_epic 						# update an epic
+	client.update_epic 					# update an epic
 	client.update_story 					# update a story
 	client.update_category 					# update a category
 	client.update_workflow 					# update a workflow
 	client.update_label 					# update a label
-	client.update_team 						# update a team
+	client.update_team 					# update a team
 ```
 
 ### Filtering
