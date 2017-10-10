@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["jd@masabi.com"]
 
   spec.summary       = %q{Clubhouse library for API version 2}
-  spec.description   = %q{Does exactly what it says on the label}
-  spec.homepage      = "https://www.masabi.com"
+  spec.description   = %q{A resource-oriented library for working with the Cloubhouse API (v2)}
+  spec.homepage      = "https://github.com/Masabi/clubhouse2-ruby"
   spec.license       = "BSD"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
