@@ -98,6 +98,7 @@ client.project(name: 'Testing').stories.each(&:delete!)
 	client.workflows 					# list all workflows and states
 	client.labels 						# list all labels
 	client.teams 						# list all teams
+	client.story_links					# list all story links
 ```
 ### Methods returning single resources
 ```ruby
@@ -110,6 +111,7 @@ client.project(name: 'Testing').stories.each(&:delete!)
 	client.workflow 					# list the first matching workflow (usually Default)
 	client.label 						# list the first matching label
 	client.team 						# list the first matching team
+	client.story_link 					# list the first matching story link
 ```
 
 ### Creation methods
@@ -123,6 +125,10 @@ client.project(name: 'Testing').stories.each(&:delete!)
 	client.create_workflow 					# create a workflow
 	client.create_label 					# create a label
 	client.create_team 					# create a team
+	client.create_story_link 			# create a story link
+	client.story.create_comment			# create a comment for a story
+	client.story.create_task			# create a task for a story
+	client.epic.create_comment			# create a comment for an epic
 ```
 ### Update methods
 ```ruby
@@ -135,6 +141,7 @@ client.project(name: 'Testing').stories.each(&:delete!)
 	client.update_workflow 					# update a workflow
 	client.update_label 					# update a label
 	client.update_team 					# update a team
+	client.update_story_link 				# update a story link
 ```
 
 ### Filtering
