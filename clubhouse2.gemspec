@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Clubhouse library for API version 2}
   spec.description   = %q{A resource-oriented library for working with the Cloubhouse API (v2)}
   spec.homepage      = "https://github.com/Masabi/clubhouse2-ruby"
-  spec.license       = "BSD"
+  spec.license       = "GPL-3.0"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'bin'
   spec.require_paths = [ 'lib' ]
   spec.required_ruby_version = '>= 2.3.0'
-  spec.add_dependency 'http', '~> 1'
+  spec.add_dependency 'http', '~> 3'
   spec.add_dependency 'pry', '~> 0.10.4'
   spec.requirements << 'A clubhouse account (https://clubhouse.io)'
 
