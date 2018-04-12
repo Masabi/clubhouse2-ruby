@@ -6,6 +6,7 @@ module Clubhouse
 				:deadline, :entity_type, :epic_id, :estimate, :external_id, :file_ids, :follower_ids, :id,
 				:linked_file_ids, :moved_at, :name, :owner_ids, :position, :project_id, :requested_by_id, :started,
 				:started_at, :started_at_override, :story_type, :task_ids, :updated_at, :workflow_state_id,
+				:commits, :branches
 			]
 		end
 
@@ -14,10 +15,10 @@ module Clubhouse
 		end
 
 		def validate(**args)
-			raise NoSuchEpic.new(args[:epic_id]) unless @client.epic(id: args[:epic_id]) if args[:epic_id] 
-			raise NoSuchProject.new(args[:project_id]) unless @client.project(id: args[:project_id]) if args[:project_id] 
-			raise NoSuchMember.new(args[:requested_by_id]) unless @client.member(id: args[:requested_by_id]) if args[:requested_by_id] 
-		
+			raise NoSuchEpic.new(args[:epic_id]) unless @client.epic(id: args[:epic_id]) if args[:epic_id]
+			raise NoSuchProject.new(args[:project_id]) unless @client.project(id: args[:project_id]) if args[:project_id]
+			raise NoSuchMember.new(args[:requested_by_id]) unless @client.member(id: args[:requested_by_id]) if args[:requested_by_id]
+
 			(args[:follower_ids] || []).each do |this_member|
 				raise NoSuchMember.new(this_member) unless @client.member(id: this_member)
 			end
@@ -102,6 +103,8 @@ module Clubhouse
 				files: [ *files ].collect(&:to_h),
 				story_links: [ *story_links ].collect(&:to_h),
 				labels: [ *labels ].collect(&:to_h),
+				branches: [ *labels ].collect(&:to_h),
+				commits: [ *labels ].collect(&:to_h),
 			})
 		end
 
