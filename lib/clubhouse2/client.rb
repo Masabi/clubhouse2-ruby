@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 module Clubhouse
-	class Client		
+	class Client
 		def initialize(api_key:, base_url: 'https://api.clubhouse.io/api/v2/')
 			@api_key = api_key
 			@base_url = base_url
@@ -15,7 +15,9 @@ module Clubhouse
 		end
 
 		def api_request(method, *params)
+			puts params
 			response = HTTP.headers(content_type: 'application/json').send(method, *params)
+			puts response.to_s
 			case response.code
 			when 429
 				sleep 30
@@ -52,7 +54,7 @@ module Clubhouse
 			new_params = args.compact.reject { |k, v| this_class.property_filter_create.include? k.to_sym }
 			response = api_request(:post, url(this_class.api_url), :json => new_params)
 			JSON.parse(response.to_s)
-		end		
+		end
 
 		def get_objects(resource_class, args = {})
 			this_class = Clubhouse::ClubhouseResource.subclass(resource_class)
@@ -97,7 +99,7 @@ module Clubhouse
 		def create_member(**args); create_object(:member, args); end
 		def members(**args); get_objects(:member, args); end
 		def member(**args); get_object(:member, args); end
-		
+
 		def create_team(**args); create_object(:team, args); end
 		def teams(**args); get_objects(:team, args); end
 		def team(**args); get_object(:team, args); end

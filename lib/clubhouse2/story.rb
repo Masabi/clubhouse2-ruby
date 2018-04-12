@@ -103,8 +103,8 @@ module Clubhouse
 				files: [ *files ].collect(&:to_h),
 				story_links: [ *story_links ].collect(&:to_h),
 				labels: [ *labels ].collect(&:to_h),
-				branches: [ *labels ].collect(&:to_h),
-				commits: [ *labels ].collect(&:to_h),
+				branches: [ *branches ].collect(&:to_h),
+				commits: [ *commits ].collect(&:to_h),
 			})
 		end
 
