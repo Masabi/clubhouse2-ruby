@@ -124,7 +124,7 @@ module Clubhouse
 		def branches(**args)
 			@branches ||= begin
 				full_story['branches'].collect do |branch_data|
-					Commit.new(client: @client, object: branch_data)
+					Branch.new(client: @client, object: branch_data)
 				end
 			end
 		end
