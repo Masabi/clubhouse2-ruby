@@ -15,9 +15,7 @@ module Clubhouse
 		end
 
 		def api_request(method, *params)
-			puts params
 			response = HTTP.headers(content_type: 'application/json').send(method, *params)
-			puts response.to_s
 			case response.code
 			when 429
 				sleep 30

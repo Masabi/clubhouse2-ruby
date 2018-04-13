@@ -6,7 +6,6 @@ module Clubhouse
 				:deadline, :entity_type, :epic_id, :estimate, :external_id, :file_ids, :follower_ids, :id,
 				:linked_file_ids, :moved_at, :name, :owner_ids, :position, :project_id, :requested_by_id, :started,
 				:started_at, :started_at_override, :story_type, :task_ids, :updated_at, :workflow_state_id,
-				:commits, :branches
 			]
 		end
 
@@ -106,6 +105,28 @@ module Clubhouse
 				branches: [ *branches ].collect(&:to_h),
 				commits: [ *commits ].collect(&:to_h),
 			})
+		end
+
+		def full_story(**args)
+			@full_story ||= begin
+				JSON.parse(@client.api_request(:get, @client.url("#{Story.api_url}/#{this.id}")))
+			end
+		end
+
+		def commits(**args)
+			@commits ||= begin
+				full_story['commits'].collect do |commit_data|
+					Commit.new(client: @client, object: commit_data)
+				end
+			end
+		end
+
+		def branches(**args)
+			@branches ||= begin
+				full_story['branches'].collect do |branch_data|
+					Commit.new(client: @client, object: branch_data)
+				end
+			end
 		end
 
 		def create_comment(**args)
