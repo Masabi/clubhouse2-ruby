@@ -109,7 +109,7 @@ module Clubhouse
 
 		def full_story(**args)
 			@full_story ||= begin
-				JSON.parse(@client.api_request(:get, @client.url("#{Story.api_url}/#{this.id}")))
+				JSON.parse(@client.api_request(:get, @client.url("#{Story.api_url}/#{id}")))
 			end
 		end
 
