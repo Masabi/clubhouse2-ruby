@@ -58,7 +58,7 @@ module Clubhouse
 		end
 
 		def value_format(key, value)
-			Date.iso8601(value) rescue value
+			DateTime.strptime(value+'+0000', '%Y-%m-%dT%H:%M:%SZ%z') rescue value
 		end
 
 		# Empties resource cache
