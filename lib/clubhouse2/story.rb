@@ -14,10 +14,10 @@ module Clubhouse
 		end
 
 		def validate(**args)
-			raise NoSuchEpic.new(args[:epic_id]) unless @client.epic(id: args[:epic_id]) if args[:epic_id] 
-			raise NoSuchProject.new(args[:project_id]) unless @client.project(id: args[:project_id]) if args[:project_id] 
-			raise NoSuchMember.new(args[:requested_by_id]) unless @client.member(id: args[:requested_by_id]) if args[:requested_by_id] 
-		
+			raise NoSuchEpic.new(args[:epic_id]) unless @client.epic(id: args[:epic_id]) if args[:epic_id]
+			raise NoSuchProject.new(args[:project_id]) unless @client.project(id: args[:project_id]) if args[:project_id]
+			raise NoSuchMember.new(args[:requested_by_id]) unless @client.member(id: args[:requested_by_id]) if args[:requested_by_id]
+
 			(args[:follower_ids] || []).each do |this_member|
 				raise NoSuchMember.new(this_member) unless @client.member(id: this_member)
 			end
@@ -102,7 +102,31 @@ module Clubhouse
 				files: [ *files ].collect(&:to_h),
 				story_links: [ *story_links ].collect(&:to_h),
 				labels: [ *labels ].collect(&:to_h),
+				branches: [ *branches ].collect(&:to_h),
+				commits: [ *commits ].collect(&:to_h),
 			})
+		end
+
+		def full_story(**args)
+			@full_story ||= begin
+				JSON.parse(@client.api_request(:get, @client.url("#{Story.api_url}/#{id}")))
+			end
+		end
+
+		def commits(**args)
+			@commits ||= begin
+				full_story['commits'].collect do |commit_data|
+					Commit.new(client: @client, object: commit_data)
+				end
+			end
+		end
+
+		def branches(**args)
+			@branches ||= begin
+				full_story['branches'].collect do |branch_data|
+					Branch.new(client: @client, object: branch_data)
+				end
+			end
 		end
 
 		def create_comment(**args)

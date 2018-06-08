@@ -18,6 +18,9 @@ require 'clubhouse2/team.rb'
 require 'clubhouse2/file.rb'
 require 'clubhouse2/task.rb'
 require 'clubhouse2/epic.rb'
+require 'clubhouse2/branch.rb'
+require 'clubhouse2/pull_request.rb'
+require 'clubhouse2/commit.rb'
 
 module Clubhouse
 end
