@@ -5,7 +5,7 @@ module Clubhouse
 				:archived, :blocker, :blocked, :comment_ids, :completed, :completed_at, :completed_at_override, :created_at,
 				:deadline, :entity_type, :epic_id, :estimate, :external_id, :file_ids, :follower_ids, :id,
 				:linked_file_ids, :moved_at, :name, :owner_ids, :position, :project_id, :requested_by_id, :started,
-				:started_at, :started_at_override, :story_type, :task_ids, :updated_at, :workflow_state_id,
+				:started_at, :started_at_override, :story_type, :task_ids, :updated_at, :workflow_state_id, :app_url
 			]
 		end
 
