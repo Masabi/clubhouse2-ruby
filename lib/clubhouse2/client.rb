@@ -4,6 +4,8 @@ require 'json'
 
 module Clubhouse
 	class Client
+		include Helpers
+		
 		def initialize(api_key:, base_url: 'https://api.clubhouse.io/api/v2/')
 			@api_key = api_key
 			@base_url = base_url
@@ -43,11 +45,6 @@ module Clubhouse
 		# If the value of a property is an object with an ID, match on that ID instead (makes for tidier queries)
 		def filter(object_array, args)
 			object_array.reject { |s| args.collect { |k, v| not resolve_to_ids([ *s.send(k) ]).include? resolve_to_ids(v) }.reduce(:|) }
-		end
-
-		def resolve_to_ids(object)
-			return object.collect { |o| resolve_to_ids(o) } if object.is_a? Array
-			(object.respond_to?(:id) ? object.id : object)
 		end
 
 		# or v.empty? if v.respond_to?(:empty?)

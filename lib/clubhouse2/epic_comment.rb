@@ -11,7 +11,7 @@ module Clubhouse
 		end
 
 		def api_url
-			"#{self.api_url}/#{@epic_id}/#{id}"
+			"#{self.class.api_url}/#{@epic_id}/#{id}"
 		end
 	end
 end

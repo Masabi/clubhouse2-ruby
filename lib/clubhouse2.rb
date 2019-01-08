@@ -1,3 +1,4 @@
+require 'clubhouse2/helpers.rb'
 require 'clubhouse2/clubhouse_resource.rb'
 require 'clubhouse2/queryable.rb'
 require 'clubhouse2/story_comment.rb'
