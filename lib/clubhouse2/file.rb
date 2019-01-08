@@ -1,5 +1,7 @@
 module Clubhouse
 	class File < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:content_type, :created_at, :description, :entity_type, :external_id, :filename, :id, :mention_ids, :name,

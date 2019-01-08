@@ -1,5 +1,7 @@
 module Clubhouse
 	class Team < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:created_at, :description, :entity_type, :id, :name, :position, :project_ids, :updated_at, :workflow,

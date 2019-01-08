@@ -1,5 +1,7 @@
 module Clubhouse
 	class Story < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:archived, :blocker, :blocked, :comment_ids, :completed, :completed_at, :completed_at_override, :created_at,

@@ -1,5 +1,7 @@
 module Clubhouse
 	class Linkedfile < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:content_type, :created_at, :description, :entity_type, :id, :mention_ids, :name,

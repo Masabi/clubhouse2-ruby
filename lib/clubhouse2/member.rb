@@ -1,12 +1,14 @@
 module Clubhouse
 	class Member < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[ :created_at, :disabled, :id, :profile, :role, :updated_at ]
 		end
 
-		def initialize(client:, object:)
+		def initialize(client: nil, object: {})
 			super
-			@profile = Profile.new(client: client, object: @profile)
+			@profile = Profile.new(object: @profile)
 
 			# Create accessors for profile properties
 			Profile.properties.each do |property|

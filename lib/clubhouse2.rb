@@ -1,4 +1,5 @@
 require 'clubhouse2/clubhouse_resource.rb'
+require 'clubhouse2/queryable.rb'
 require 'clubhouse2/story_comment.rb'
 require 'clubhouse2/epic_comment.rb'
 require 'clubhouse2/linked_file.rb'

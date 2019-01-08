@@ -1,5 +1,7 @@
 module Clubhouse
 	class Project < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:abbreviation, :archived, :color, :created_at, :days_to_thermometer, :description, :entity_type, :external_id,

@@ -1,5 +1,7 @@
 module Clubhouse
 	class Task < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:complete, :completed_at, :created_at, :description, :entity_type, :external_id, :id, :mention_ids, :owner_ids,

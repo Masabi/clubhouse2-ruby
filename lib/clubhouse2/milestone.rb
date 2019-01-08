@@ -1,5 +1,7 @@
 module Clubhouse
 	class Milestone < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:categories, :completed, :completed_at, :completed_at_override, :created_at, :description, :entity_type,

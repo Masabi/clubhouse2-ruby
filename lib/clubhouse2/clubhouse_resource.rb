@@ -21,19 +21,17 @@ module Clubhouse
 			self.property_filter_create
 		end
 
+		def self.all
+			@@subclasses
+		end
+
 		def self.subclass(sub_class)
 			@@subclasses.find { |s| s.name == 'Clubhouse::%s' % sub_class.capitalize }
 		end
 
-		def api_url
-			self.class.api_url + "/#{@id}"
-		end
-
 		def self.validate(args); end
 
-		def initialize(client:, object:)
-			@client = client
-
+		def initialize(object: {})
 			self.class.properties.each do |this_property|
 				self.class.class_eval { attr_accessor(this_property.to_sym) }
 				self.class.send(:define_method, (this_property.to_s + '=').to_sym) do |value|
@@ -42,7 +40,7 @@ module Clubhouse
 				end
 			end
 
-			set_properties(object)
+			set_properties(object) if object
 			self
 		end
 
@@ -59,23 +57,6 @@ module Clubhouse
 
 		def value_format(key, value)
 			DateTime.strptime(value+'+0000', '%Y-%m-%dT%H:%M:%SZ%z') rescue value
-		end
-
-		# Empties resource cache
-		def flush
-			@client.flush(self.class)
-		end
-
-		def update(args = {})
-			new_params = args.reject { |k, v| self.class.property_filter_update.include? k.to_sym }
-			validate(new_params)
-			flush
-			@client.api_request(:put, @client.url(api_url), :json => new_params)
-		end
-
-		def delete!
-			flush
-			@client.api_request(:delete, @client.url(api_url))
 		end
 
 		def to_h

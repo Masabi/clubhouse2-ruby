@@ -1,5 +1,7 @@
 module Clubhouse
 	class Label < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[ :archived, :color, :created_at, :entity_type, :external_id, :id, :name, :stats, :updated_at ]
 		end

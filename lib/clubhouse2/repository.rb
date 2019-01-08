@@ -1,5 +1,7 @@
 module Clubhouse
 	class Repository < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[ :created_at, :entity_type, :external_id, :full_name, :id, :name, :type, :updated_at, :url ]
 		end

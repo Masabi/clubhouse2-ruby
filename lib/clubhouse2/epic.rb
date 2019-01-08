@@ -1,5 +1,7 @@
 module Clubhouse
-	class Epic < ClubhouseResource		
+	class Epic < ClubhouseResource
+		include Queryable
+
 		def self.properties
 			[
 				:archived, :comments, :completed, :completed_at, :completed_at_override, :created_at, :deadline, :description,
