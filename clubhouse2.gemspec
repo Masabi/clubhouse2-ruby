@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = [ 'lib' ]
   spec.required_ruby_version = '>= 2.3.0'
   spec.add_dependency 'http', '~> 3'
-  spec.add_dependency 'pry', '~> 0.10.4'
+  spec.add_development_dependency 'webmock'
   spec.requirements << 'A clubhouse account (https://clubhouse.io)'
 
   spec.add_development_dependency "bundler", "~> 1.10"

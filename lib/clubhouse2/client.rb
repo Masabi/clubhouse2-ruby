@@ -15,15 +15,21 @@ module Clubhouse
 		end
 
 		def api_request(method, *params)
-			response = HTTP.headers(content_type: 'application/json').send(method, *params)
-			case response.code
-			when 429
-				sleep 30
-				api_request(method, *params)
-			when 200
-			when 201
-			else
-				raise ClubhouseAPIError.new(response)
+			retries = 3
+			while true
+				response = HTTP.headers(content_type: 'application/json').send(method, *params)
+				case response.code
+				when 429
+					sleep 30
+					retries = retries - 1
+					break if retries == 0
+				when 200
+					break
+				when 201
+					break
+				else
+					raise ClubhouseAPIError.new(response)
+				end
 			end
 
 			response
