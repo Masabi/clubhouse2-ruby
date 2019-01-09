@@ -5,7 +5,7 @@ require 'json'
 module Clubhouse
 	class Client
 		include Helpers
-		
+
 		def initialize(api_key:, base_url: 'https://api.clubhouse.io/api/v2/')
 			@api_key = api_key
 			@base_url = base_url
@@ -44,10 +44,9 @@ module Clubhouse
 		# Take all the provided properties, and filter out any resources that don't match.
 		# If the value of a property is an object with an ID, match on that ID instead (makes for tidier queries)
 		def filter(object_array, args)
-			object_array.reject { |s| args.collect { |k, v| not resolve_to_ids([ *s.send(k) ]).include? resolve_to_ids(v) }.reduce(:|) }
+			object_array.reject { |s| args.collect { |k, v| not resolve_to_ids([ *s.send(k) ]).include?(resolve_to_ids(v)) }.reduce(:|) }
 		end
 
-		# or v.empty? if v.respond_to?(:empty?)
 		def create_object(resource_class, args)
 			this_class = Clubhouse::ClubhouseResource.subclass(resource_class)
 			this_class.validate(args)
