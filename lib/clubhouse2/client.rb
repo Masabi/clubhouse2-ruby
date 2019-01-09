@@ -25,9 +25,7 @@ module Clubhouse
 					sleep 30
 					retries = retries - 1
 					break if retries == 0
-				when 200
-					break
-				when 201
+				when 200..299
 					break
 				else
 					raise ClubhouseAPIError.new(response)
@@ -70,6 +68,10 @@ module Clubhouse
 
 		def get_object(resource_class, args = {})
 			get_objects(resource_class, args).first
+		end
+
+		def inspect
+			"#<#{self.class.name} base_url=#{@base_url}>"
 		end
 
 		# ---

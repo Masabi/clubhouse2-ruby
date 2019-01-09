@@ -14,7 +14,10 @@ module Clubhouse
 		end
 
 		def stories(**args)
-			@stories ||= JSON.parse(@client.api_request(:get, @client.url("#{api_url}/stories"))).collect { |story| Story.new(client: @client, object: story) }
+			@stories ||= JSON.parse(@client.api_request(:get, @client.url("#{api_url}/stories"))).collect do |story|
+				Story.new(client: @client, object: story)
+			end
+			
 			@stories.reject { |s| args.collect { |k,v| s.send(k) != v }.reduce(:|) }
 		end
 

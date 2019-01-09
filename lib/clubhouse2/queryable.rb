@@ -31,6 +31,16 @@ module Clubhouse
 			@client.api_request(:put, @client.url(api_url), :json => new_params)
 		end
 
+		def archive!
+			flush
+			@client.api_request(:put, @client.url(api_url), :json => { archived: true })
+		end
+
+		def unarchive!
+			flush
+			@client.api_request(:put, @client.url(api_url), :json => { archived: false })
+		end
+
 		def delete!
 			flush
 			@client.api_request(:delete, @client.url(api_url))
