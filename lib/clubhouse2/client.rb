@@ -54,34 +54,6 @@ module Clubhouse
 			JSON.parse(response.to_s)
 		end
 
-		def search_stories(**search_query)
-			this_class = Clubhouse::SearchStories
-
-			search_parts = []
-			search_query.each_pair do |k, v|
-				search_parts << "#{URI.www_form_encode(k)}=#{URI.www_form_encode(v)}"
-			end
-
-			search_string = search_parts.join('&')
-
-			uri_string = url(this_class.api_url).to_s
-			uri_string += "&#{search_parts}"
-
-			udpated_uri = URI.new(uri_string)
-
-			URI::HTTPS.build(host: 'example.com', query: hash.to_query)
-
-			unless @resources[this_class]
-				response = api_request(:get, udpated_uri)
-				@resources[this_class] = JSON.parse(response.to_s).collect do |resource|
-					SearchStoriesPage.new(client: self, object: resource)
-				end
-			end
-
-			filter(@resources[this_class], args)
-
-		end
-
 		def get_objects(resource_class, args = {})
 			this_class = Clubhouse::ClubhouseResource.subclass(resource_class)
 			unless @resources[this_class]
@@ -126,7 +98,7 @@ module Clubhouse
 
 			search_string = search_parts.join(' ')
 
-			uri_string = url(SearchStories.api_url).to_s
+			uri_string = url(SearchStoriesPage.api_url).to_s
 			uri_string += "&query=#{URI.encode(search_string)}"
 			uri_string += "&page_size=#{page_size}"
 			uri_string += "&next=#{URI.encode(next_page_id)}" unless next_page_id.nil?
