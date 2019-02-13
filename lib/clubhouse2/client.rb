@@ -129,7 +129,7 @@ module Clubhouse
 			uri_string = url(SearchStories.api_url).to_s
 			uri_string += "&query=#{URI.encode(search_string)}"
 			uri_string += "&page_size=#{page_size}"
-			uri_string += "&next=#{URI.encode(next_page_id)}" unless next_page_id.blank?
+			uri_string += "&next=#{URI.encode(next_page_id)}" unless next_page_id.nil?
 
 			updated_uri = URI(uri_string)
 			response = api_request(:get, updated_uri)

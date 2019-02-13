@@ -25,7 +25,7 @@ module Clubhouse
     end
 
     def next_page_id
-      return nil if @next.blank?
+      return nil if @next.nil?
 
       CGI.parse(URI::parse(@next).query)['next'].first
     end
