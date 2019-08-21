@@ -39,7 +39,7 @@ module Clubhouse
 			end
 
 			(args[:labels] || []).collect! do |this_label|
-				this_label.is_a? Label ? this_label : @client.label(id: this_label['name'])
+				this_label.is_a?(Label) ? this_label : @client.label(id: this_label['name'])
 			end
 		end
 
