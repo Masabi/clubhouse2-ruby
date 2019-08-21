@@ -17,8 +17,11 @@ module Clubhouse
 		end
 
 		# A list of properties to exlude from any update request
+
+		PROPERTIES_ALLOW_UPDATES = [:workflow_state_id]
+
 		def self.property_filter_update
-			self.property_filter_create
+			self.property_filter_create - PROPERTIES_ALLOW_UPDATES
 		end
 
 		def self.subclass(sub_class)

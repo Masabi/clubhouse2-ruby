@@ -87,6 +87,28 @@ module Clubhouse
 
 		def story(**args); stories(**args).first; end
 
+		def stories_search(page_size = 25, next_page_id = nil, **args)
+			search_parts = []
+			args.each_pair do |k, v|
+				term = URI.encode(k.to_s)
+				v.each do |value|
+					search_parts << "#{term}:\"#{value}\""
+				end
+			end
+
+			search_string = search_parts.join(' ')
+
+			uri_string = url(SearchStoriesPage.api_url).to_s
+			uri_string += "&query=#{URI.encode(search_string)}"
+			uri_string += "&page_size=#{page_size}"
+			uri_string += "&next=#{URI.encode(next_page_id)}" unless next_page_id.nil?
+
+			updated_uri = URI(uri_string)
+			response = api_request(:get, updated_uri)
+
+			SearchStoriesPage.new(client: self, json_object: JSON.parse(response.to_s))
+		end
+
 		def create_story_link(**args); create_object(:storylink, args); end
 		def story_links(**args)
 			filter(stories.collect(&:story_links).flatten, args)

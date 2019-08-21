@@ -3,7 +3,7 @@ module Clubhouse
 		def self.properties
 			[
 				:abbreviation, :archived, :color, :created_at, :days_to_thermometer, :description, :entity_type, :external_id,
-				:follower_ids, :id, :iteration_length, :name, :show_thermometer, :start_time, :stats, :updated_at
+				:follower_ids, :id, :iteration_length, :name, :show_thermometer, :start_time, :stats, :updated_at, :team_id
 			]
 		end
 
